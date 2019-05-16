@@ -1,0 +1,19 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: >
+  Creates an S3 bucket to store the lambda binaries for this project
+
+Parameters:
+  Prefix:
+    Description: The prefix to use when creating globally unique resources
+    Type: String
+
+Resources:
+  BinaryBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub "${Prefix}.${AWS::StackName}"
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
